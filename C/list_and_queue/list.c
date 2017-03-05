@@ -20,7 +20,7 @@ list_type * init_list(){
  * 		Delete a given node
  */
 
-void delete_node(list_type * our_list, struct node * np){
+void delete_node(list_type * our_list, node_type * np){
 	if(np != NULL){
 		if(np->previous_node == NULL || np->next_node == NULL){
 			/* if this is the last node and first node*/
@@ -55,7 +55,6 @@ void delete_node(list_type * our_list, struct node * np){
  */
 
 void destroy_list(list_type * our_list){
-	struct node * np;
 	while(our_list->number_of_nodes > 0){
 		delete_node(our_list, our_list->first_node);
 	}
