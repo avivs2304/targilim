@@ -1,14 +1,9 @@
-/*
- * Addition.cpp
- *
- *  Created on: Mar 16, 2017
- *      Author: aviv
- */
 
 #include "Addition.h"
 
 Addition::Addition() : calculatorOperation() {
-	operations = new string[5];
+	n_operations = 5;
+	operations = new string[n_operations];
 	operations[0]="add";
 	operations[1]="Add";
 	operations[2]="+";
@@ -18,6 +13,10 @@ Addition::Addition() : calculatorOperation() {
 }
 
 Addition::~Addition() {
-	// TODO Auto-generated destructor stub
+	delete operations;
+}
+
+double Addition::calcResult(double currVal, vector<string> parameters){
+	return (currVal + atof(parameters[0].c_str()));
 }
 

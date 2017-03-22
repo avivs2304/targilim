@@ -1,8 +1,5 @@
 /*
- * Addition.h
- *
- *  Created on: Mar 16, 2017
- *      Author: aviv
+ * 		Operation has the ability to add a value to currVal
  */
 
 #ifndef ADDITION_H_
@@ -13,6 +10,7 @@ class Addition : public calculatorOperation {
 public:
 	Addition();
 	virtual ~Addition();
+	virtual double calcResult(double currVal, vector<string> parameters);
 };
 
 #endif /* ADDITION_H_ */
