@@ -20,6 +20,7 @@ string find_word(string str){
 /*
  * 		Function returns a vector containing parameters extracted from a string
  */
+
 vector<string> getParameters(string str){
 	vector<string> params;
 	params.reserve(10);
@@ -31,6 +32,10 @@ vector<string> getParameters(string str){
 	}
 	return params;
 }
+
+/*
+ *		Function prints an error if an unknown operation is parsed.
+ */
 
 void PrintError(){
 	cout << "\t operation or syntax not supported \n\t be careful of spaces before operation"
