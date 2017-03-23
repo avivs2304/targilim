@@ -13,42 +13,42 @@ string2:
 message db "(0 is good, FFFFFFFF is bad) == %08X", 10, 0
 
 main:
-	CALL strcmp
-	PUSH eax
-	PUSH message
-	CALL printf
+	CALL strcmp; compare strings
+	PUSH eax; push result
+	PUSH message; in format of the message
+	CALL printf; print result
 	ADD ebp, 8
 	CALL exit		
 	
 strcmp:
-	PUSH ebp
-	MOV ebp, esp
-	PUSH ebx
-	PUSH ecx
-	MOV eax, 0
+	PUSH ebp; save ebp
+	MOV ebp, esp; set new ebp as stack pointer
+	PUSH ebx; push previous ebx value
+	PUSH ecx; push previous ecx value
+	MOV eax, 0; set eax to 0 (index)
 	JMP compare
-	compare:
-		MOVZX ebx, BYTE [string1+eax]
-		MOVZX ecx, BYTE [string2+eax]
-		CMP ebx, ecx
-		JNE end_not_good
-		CMP ebx, 0		
-		JE end_good
-		INC eax
-		JMP compare
+	compare:; compare byte by byte untill end of string
+		MOVZX ebx, BYTE [string1+eax]; MOV the byte in string1 with index eax to ebx (extend zeros to fix size mismatch)
+		MOVZX ecx, BYTE [string2+eax]; MOV the byte in string2 with index eax to ebx (extend zeros to fix size mismatch)
+		CMP ebx, ecx; compare both chars
+		JNE end_not_good; if they dont equal tehn exit with error
+		CMP ebx, 0; check if we reached the end of the string
+		JE end_good; exit with a good return code
+		INC eax; increase index to check next char
+		JMP compare; check next char
 	
 	end_not_good:
-		POP ebp
-		POP ebx
-		POP ecx
-		MOV eax, -1
+		POP ebp; set the previous ebp
+		POP ebx; set the previous ebx
+		POP ecx; set the previous ecx
+		MOV eax, -1; return -1 error (bad)
 		RET
 
 	end_good:
-		POP ebp
-		POP ebx
-		POP ecx
-		MOV eax, 0
+		POP ebp; set the previous ebp
+		POP ebx; set the previous ebx
+		POP ecx; set the previous ecx
+		MOV eax, 0; return 0 (good)
 		RET
 
 	
